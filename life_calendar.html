@@ -24,7 +24,7 @@
 		}
 		h1 {
 			font-size: 3.7em;
-			margin-bottom: -1.2em;
+			margin:0;
 		}
 		#calendar {
 			margin: 0 5em;
@@ -46,7 +46,10 @@
 			max-width: 1.6em;
 			display:flex;
 			justify-content: center;
-			margin-bottom: 1em;
+			margin-bottom: 0;
+		}
+		.col p {
+			margin:0;
 		}
 		.week {
 			display: flex;
@@ -60,12 +63,12 @@
 		}
 		#now90 {
 			text-align: right;
-			margin-top: -5em;
 			display: flex;
 			flex-flow: column;
-			margin-right: 1.5em;
 			width: fit-content;
-			float: right;
+			position:absolute;
+			top:0;
+			right:0;
 		}
 		
 		.highlighted {
@@ -77,20 +80,28 @@
 
 
 <body>
-<h1>LIFE CALENDAR</h1>
+
 <div id="dob">
+	<h2 style="margin:0;">DOB:</h2>
 	<label for="day">Day:&nbsp;</label><input onchange="fillincal()" placeholder="31" id="day" type="number" step="1" min="1" max="31"/>
 	<label for="month">Month:&nbsp;</label><input onchange="fillincal()" placeholder="12" id="month" type="number" step="1" min="1" max="12"/>
 	<label for="year">Year:&nbsp;</label><input onchange="fillincal()" placeholder="2019" id="year" type="number" step="1" min="1929" max="2019"/>
 </div>
-<p style="position:absolute; left:-2.5em; top:15em; transform: rotate(90deg);">YEAR OF YOUR LIFE ---></p>
-<p style="text-align:left; margin-left:7em; margin-bottom:-1em;">WEEK OF THE YEAR ---></p>
-<div id="calendar"></div>
-<h2>WAIT BUT WHY</h2>
-<div id="now90">
-	<p style="text-align:center; padding:0; margin:0; line-height: 1em; font-size:1.5em;">NOW</p>
-	<p style="text-align:center; padding:0; margin:0; line-height: 1em;">YOU'RE</p>
-	<p style="text-align:center; padding:0; margin: -.65em 0 0 0; font-size: 3.4em;">90</p>
+<div style="position:relative">
+	<p style="position:absolute; bottom:0; text-align:left; margin:0 0 0 7em;">WEEK OF THE YEAR ---></p>
+	<h1>LIFE CALENDAR</h1>
+</div>
+<div style="position:relative;">
+	<p style="position:absolute; top:6em; left:-2.5em; transform: rotate(90deg);">YEAR OF YOUR LIFE ---></p>
+	<div id="calendar"></div>
+</div>
+<div style="position:relative;">
+	<h2><a href="https://waitbutwhy.com/2014/05/life-weeks.html">WAIT BUT WHY</a></h2>
+	<div id="now90">
+		<p style="text-align:center; padding:0; margin:0; line-height: 1em; font-size:1.5em;">NOW</p>
+		<p style="text-align:center; padding:0; margin:0; line-height: 1em;">YOU'RE</p>
+		<p style="text-align:center; padding:0; margin: 0; line-height:.9em; font-size: 3.4em;">90</p>
+	</div>
 </div>
 
 	<script type="text/javascript">
@@ -153,7 +164,7 @@
 			dob = Date.parse(dob);
 			
 			now = Date.now();
-			weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000
+			weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000;
 			
 			for ( var i = 0; i < weeks; i++ ) {
 				var shit = document.querySelector(".week" + i);
