@@ -1,0 +1,172 @@
+<html lang="en" encoding="utf-8">
+<head>
+
+	<!--link rel="stylesheet" type="text/css" href="/Inter-3.9/Inter(web)/inter.css"-->
+
+
+	<meta charset="utf-8"/>
+	<style>
+	@import url('./Inter-3.9/Inter(web)/inter.css');
+		html {
+			text-align: center;
+			font-family: 'Inter', Helvetica, Arial, sans-serif;
+			font-weight:600;
+		}
+		@supports (font-variation-settings: normal) {
+			html { 
+				font-family: 'Inter var', Helvetica, Arial, sans-serif; 
+			}
+		}
+		body {
+		
+			width: 111.2em;
+			
+		}
+		h1 {
+			font-size: 3.7em;
+			margin-bottom: -1.2em;
+		}
+		#calendar {
+			margin: 0 5em;
+			display: grid;
+			grid-template-columns: repeat(53, 1fr);
+			grid-gap: 4px 4px;
+			width: 103.15em; 
+			/* width: 125.15em; */
+		}
+		.row { 
+			height: 1.6em;
+			display:flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.col {
+			height: 1.6em;
+			
+			max-width: 1.6em;
+			display:flex;
+			justify-content: center;
+			margin-bottom: 1em;
+		}
+		.week {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 1px solid #000;
+			padding: 0;
+			height: 1.6em;
+			max-width: 1.6em;
+			background-color: #f5f7f9;
+		}
+		#now90 {
+			text-align: right;
+			margin-top: -5em;
+			display: flex;
+			flex-flow: column;
+			margin-right: 1.5em;
+			width: fit-content;
+			float: right;
+		}
+		
+		.highlighted {
+			/* background-color: #333; */
+		}
+	</style>
+	
+</head>
+
+
+<body>
+<h1>LIFE CALENDAR</h1>
+<div id="dob">
+	<label for="day">Day:&nbsp;</label><input onchange="fillincal()" placeholder="31" id="day" type="number" step="1" min="1" max="31"/>
+	<label for="month">Month:&nbsp;</label><input onchange="fillincal()" placeholder="12" id="month" type="number" step="1" min="1" max="12"/>
+	<label for="year">Year:&nbsp;</label><input onchange="fillincal()" placeholder="2019" id="year" type="number" step="1" min="1929" max="2019"/>
+</div>
+<p style="position:absolute; left:-2.5em; top:15em; transform: rotate(90deg);">YEAR OF YOUR LIFE ---></p>
+<p style="text-align:left; margin-left:7em; margin-bottom:-1em;">WEEK OF THE YEAR ---></p>
+<div id="calendar"></div>
+<h2>WAIT BUT WHY</h2>
+<div id="now90">
+	<p style="text-align:center; padding:0; margin:0; line-height: 1em; font-size:1.5em;">NOW</p>
+	<p style="text-align:center; padding:0; margin:0; line-height: 1em;">YOU'RE</p>
+	<p style="text-align:center; padding:0; margin: -.65em 0 0 0; font-size: 3.4em;">90</p>
+</div>
+
+	<script type="text/javascript">
+	
+	
+		var _div_calendar = document.querySelector("#calendar");
+		// var _div_calendar = document.createElement('div');
+		// _div_calendar.id = 'calendar';
+		// document.getElementsByTagName('body')[0].appendChild(_div_calendar);
+		_div_calendar.appendChild(document.createElement('div'));
+		
+		for ( var i = 1; i <= 52; i++ ) {
+		
+			var _div_week_col = document.createElement('div');
+			_div_week_col.classList.add('col');
+			_div_week_col.classList.add('col' + i);
+			_div_calendar.appendChild(_div_week_col);
+			var _txt = document.createElement('p');
+			_txt.innerText = i;
+			_div_week_col.appendChild(_txt);
+		}
+		
+		for ( var i = 0; i < 52 * 90; i++ ) {
+			if ( i % 52 === 0 ) {
+				var _div_week_row = document.createElement('div');
+				_div_week_row.classList.add('row');
+				_div_week_row.classList.add('row' + i);
+				_div_calendar.appendChild(_div_week_row);
+				var _txt = document.createElement('p');
+				_txt.innerText = i / 52;
+				_div_week_row.appendChild(_txt);
+			}
+			var _div_week = document.createElement('div');
+			_div_week.classList.add('week');
+			_div_week.classList.add('week' + i);
+			_div_calendar.appendChild(_div_week);
+		}
+		
+		// var dob = prompt("enter dob:");
+		// dob = Date.parse(dob);
+		
+		
+		function fillincal() {
+			document.querySelectorAll(".week").forEach((week) => {
+				week.innerHTML = "";
+			});
+		
+			var day = document.querySelector("#day").value;
+			var month = document.querySelector("#month").value;
+			var year = document.querySelector("#year").value;
+			
+			//// to speed up get the last highlighted. then find difference between given date and previous given date. 
+			//// if ( magnitude(previous_date - new_date) < magnitude(highlighted_cells) ) { remvoe hihlights from tail }
+			//// else { remove all highlights and draw again as normal }
+			// var greatest_filled = document.querySelectorAll(".highlighted")[-1]";
+			
+			
+			
+			dob = year + "-" + month + "-" + day;
+			dob = Date.parse(dob);
+			
+			now = Date.now();
+			weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000
+			
+			for ( var i = 0; i < weeks; i++ ) {
+				var shit = document.querySelector(".week" + i);
+				shit.classList.add("highlighted");
+				shit.innerHTML = "&cross;";
+			}
+		
+		}
+		
+		
+		
+	</script>
+
+</body>
+
+</html>
