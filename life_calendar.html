@@ -83,9 +83,9 @@
 
 <div id="dob">
 	<h2 style="margin:0;">DOB:</h2>
-	<label for="day">Day:&nbsp;</label><input onchange="fillincal()" placeholder="31" id="day" type="number" step="1" min="1" max="31"/>
-	<label for="month">Month:&nbsp;</label><input onchange="fillincal()" placeholder="12" id="month" type="number" step="1" min="1" max="12"/>
-	<label for="year">Year:&nbsp;</label><input onchange="fillincal()" placeholder="2019" id="year" type="number" step="1" min="1929" max="2019"/>
+	<label for="day">Day:&nbsp;</label><input class="dobinput" placeholder="31" id="dob_day" type="number" step="1" min="1" max="31"/>
+	<label for="month">Month:&nbsp;</label><input class="dobinput" placeholder="12" id="dob_month" type="number" step="1" min="1" max="12"/>
+	<label for="year">Year:&nbsp;</label><input class="dobinput" placeholder="2019" id="dob_year" type="number" step="1" min="1929" max="2019"/>
 </div>
 <div style="position:relative">
 	<p style="position:absolute; bottom:0; text-align:left; margin:0 0 0 7em;">WEEK OF THE YEAR ---></p>
@@ -105,6 +105,7 @@
 </div>
 
 	<script type="text/javascript">
+	
 	
 	
 		var _div_calendar = document.querySelector("#calendar");
@@ -144,14 +145,26 @@
 		// dob = Date.parse(dob);
 		
 		
-		function fillincal() {
+		
+		
+		const dob_day = document.querySelector('#dob_day');
+		const dob_month = document.querySelector('#dob_month');
+		const dob_year = document.querySelector('#dob_year');
+		dob_day.addEventListener('input', fillincal);
+		dob_month.addEventListener('input', fillincal);
+		dob_year.addEventListener('input', fillincal);
+		
+		
+		
+		function fillincal() 
+		{
 			document.querySelectorAll(".week").forEach((week) => {
 				week.innerHTML = "";
 			});
 		
-			var day = document.querySelector("#day").value;
-			var month = document.querySelector("#month").value;
-			var year = document.querySelector("#year").value;
+			var day = document.querySelector("#dob_day").value;
+			var month = document.querySelector("#dob_month").value;
+			var year = document.querySelector("#dob_year").value;
 			
 			//// to speed up get the last highlighted. then find difference between given date and previous given date. 
 			//// if ( magnitude(previous_date - new_date) < magnitude(highlighted_cells) ) { remvoe hihlights from tail }
@@ -166,14 +179,15 @@
 			now = Date.now();
 			weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000;
 			
+			
+			
 			for ( var i = 0; i < weeks; i++ ) {
-				var shit = document.querySelector(".week" + i);
-				shit.classList.add("highlighted");
-				shit.innerHTML = "&cross;";
+				var week = document.querySelector(".week" + i);
+				week.classList.add("highlighted");
+				week.innerHTML = "&cross;";
 			}
 		
 		}
-		
 		
 		
 	</script>
