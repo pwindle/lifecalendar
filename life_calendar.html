@@ -109,9 +109,6 @@
 	
 	
 		var _div_calendar = document.querySelector("#calendar");
-		// var _div_calendar = document.createElement('div');
-		// _div_calendar.id = 'calendar';
-		// document.getElementsByTagName('body')[0].appendChild(_div_calendar);
 		_div_calendar.appendChild(document.createElement('div'));
 		
 		for ( var i = 1; i <= 52; i++ ) {
@@ -141,54 +138,55 @@
 			_div_calendar.appendChild(_div_week);
 		}
 		
-		// var dob = prompt("enter dob:");
-		// dob = Date.parse(dob);
-		
-		
-		
-		
 		const dob_day = document.querySelector('#dob_day');
 		const dob_month = document.querySelector('#dob_month');
 		const dob_year = document.querySelector('#dob_year');
-		dob_day.addEventListener('input', fillincal);
-		dob_month.addEventListener('input', fillincal);
-		dob_year.addEventListener('input', fillincal);
+		dob_day.addEventListener('input', refresh_calendar);
+		dob_month.addEventListener('input', refresh_calendar);
+		dob_year.addEventListener('input', refresh_calendar);
 		
 		
 		
-		function fillincal() 
+		function refresh_calendar() 
 		{
-			document.querySelectorAll(".week").forEach((week) => {
-				week.innerHTML = "";
-			});
 		
-			var day = document.querySelector("#dob_day").value;
-			var month = document.querySelector("#dob_month").value;
-			var year = document.querySelector("#dob_year").value;
-			
-			//// to speed up get the last highlighted. then find difference between given date and previous given date. 
-			//// if ( magnitude(previous_date - new_date) < magnitude(highlighted_cells) ) { remvoe hihlights from tail }
-			//// else { remove all highlights and draw again as normal }
-			// var greatest_filled = document.querySelectorAll(".highlighted")[-1]";
+			var highlighted_count = document.querySelectorAll(".highlighted").length;
 			
 			
+			var day = document.querySelector("#dob_day").value != "" ? document.querySelector("#dob_day").value : 30;
+			var month = document.querySelector("#dob_month").value != "" ? document.querySelector("#dob_month").value : 12;
+			var year = document.querySelector("#dob_year").value != "" ? document.querySelector("#dob_year").value : 2019;
 			
-			dob = year + "-" + month + "-" + day;
+			var dob = year + "-" + month + "-" + day;
+			// dob = dob.replace(/(?<=-)(\d{1}$)/, "0$&")
+			// dob = dob.replace(/(?<=-)(\d{1})/, "0$&")
 			dob = Date.parse(dob);
 			
-			now = Date.now();
-			weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000;
+			var now = Date.now();
+			var weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000;
 			
-			
-			
-			for ( var i = 0; i < weeks; i++ ) {
-				var week = document.querySelector(".week" + i);
-				week.classList.add("highlighted");
-				week.innerHTML = "&cross;";
+			var highlighted_diff = Math.floor(Math.abs(highlighted_count - weeks));
+			if (highlighted_count > weeks) {
+				// remove highlights from tail
+				var highlighted_last_item = document.querySelectorAll(".highlighted").item(highlighted_count-1);
+				for ( var i = 0; i < highlighted_diff; i++ ) {
+					// highlighted_count - highlighted_diff
+					var week = document.querySelector(".week" + (highlighted_count - i));
+					week.classList.remove("highlighted");
+					week.innerHTML = "";
+				}
 			}
-		
+			else {
+				// remove highlights from tail
+				var highlighted_last_item = document.querySelectorAll(".highlighted").item(highlighted_count-1);
+				for ( var i = 0; i < highlighted_diff; i++ ) {
+					// highlighted_count - highlighted_diff
+					var week = document.querySelector(".week" + (highlighted_count + 1 + i));
+					week.classList.add("highlighted");
+					week.innerHTML = "&cross;";
+				}
+			}
 		}
-		
 		
 	</script>
 
