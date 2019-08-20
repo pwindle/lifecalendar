@@ -215,11 +215,11 @@
 				}
 			}
 			else {
-				// remove highlights from tail
+				// add highlights to tail
 				var highlighted_last_item = document.querySelectorAll(".highlighted").item(highlighted_count-1);
 				for ( var i = 0; i < highlighted_diff; i++ ) {
 					// highlighted_count - highlighted_diff
-					var week = document.querySelector(".week" + (highlighted_count + 1 + i));
+					var week = document.querySelector(".week" + (highlighted_count + i));
 					week.classList.add("highlighted");
 					week.innerHTML = "&cross;";
 				}
