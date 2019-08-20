@@ -72,7 +72,12 @@
 		}
 		
 		.highlighted {
-			/* background-color: #333; */
+			background-color: #ccc;
+		}
+		
+		.landscape { 
+			transform-origin: top right;
+			transform: rotate(-90deg) translateY(-50%) scale(.5);
 		}
 	</style>
 	
@@ -81,26 +86,32 @@
 
 <body>
 
-<div id="dob">
+<div>
 	<h2 style="margin:0;">DOB:</h2>
 	<input type="date" id="dob" name="dob"
 		value="2018-07-22"
-		min="1900-01-01" max="2100-12-31">
+		min="1900-01-01"
+		max="2100-12-31">
 </div>
-<div style="position:relative">
-	<p style="position:absolute; bottom:0; text-align:left; margin:0 0 0 7em;">WEEK OF THE YEAR ---></p>
-	<h1>LIFE CALENDAR</h1>
+<div id="orientation">
+	<label>Landscape Mode</label><input type="checkbox" id="landscape" name="landscape" value="checked"/>
 </div>
-<div style="position:relative;">
-	<p style="position:absolute; top:6em; left:-2.5em; transform: rotate(90deg);">YEAR OF YOUR LIFE ---></p>
-	<div id="calendar"></div>
-</div>
-<div style="position:relative;">
-	<h2><a href="https://waitbutwhy.com/2014/05/life-weeks.html">WAIT BUT WHY</a></h2>
-	<div id="now90">
-		<p style="text-align:center; padding:0; margin:0; line-height: 1em; font-size:1.5em;">NOW</p>
-		<p style="text-align:center; padding:0; margin:0; line-height: 1em;">YOU'RE</p>
-		<p style="text-align:center; padding:0; margin: 0; line-height:.9em; font-size: 3.4em;">90</p>
+<div id="orient">
+	<div style="position:relative">
+		<p style="position:absolute; bottom:0; text-align:left; margin:0 0 0 7em;">WEEK OF THE YEAR ---></p>
+		<h1>LIFE CALENDAR</h1>
+	</div>
+	<div style="position:relative;">
+		<p style="position:absolute; top:6em; left:-2.5em; transform: rotate(90deg);">YEAR OF YOUR LIFE ---></p>
+		<div id="calendar"></div>
+	</div>
+	<div style="position:relative;">
+		<h2><a href="https://waitbutwhy.com/2014/05/life-weeks.html">WAIT BUT WHY</a></h2>
+		<div id="now90">
+			<p style="text-align:center; padding:0; margin:0; line-height: 1em; font-size:1.5em;">NOW</p>
+			<p style="text-align:center; padding:0; margin:0; line-height: 1em;">YOU'RE</p>
+			<p style="text-align:center; padding:0; margin: 0; line-height:.9em; font-size: 3.4em;">90</p>
+		</div>
 	</div>
 </div>
 
@@ -136,6 +147,42 @@
 			_div_week.classList.add('week');
 			_div_week.classList.add('week' + i);
 			_div_calendar.appendChild(_div_week);
+		}
+		
+		
+		const landscape = document.querySelector('input#landscape');
+		landscape.addEventListener('input', orient);
+		
+		function orient()
+		{
+			if (landscape.checked) {
+				var orient = document.querySelector('#orient');
+				orient.classList.add("landscape");
+				var row = document.querySelectorAll(".row");
+				for (i = 0; i < row.length; ++i) {
+					row[i].style.transform = "rotate(90deg)";
+				}
+				var col = document.querySelectorAll(".col");
+				for (i = 0; i < col.length; ++i) {
+					col[i].style.transform = "rotate(90deg)";
+					col[i].style.height = "unset";
+				}
+				document.querySelector("#now90").style.transform = "rotate(90deg)";
+			}
+			else {
+				var orient = document.querySelector('#orient');
+				orient.classList.remove("landscape");
+				var row = document.querySelectorAll(".row");
+				for (i = 0; i < row.length; ++i) {
+					row[i].style.transform = "rotate(0deg)";
+				}
+				var col = document.querySelectorAll(".col");
+				for (i = 0; i < col.length; ++i) {
+					col[i].style.transform = "rotate(0deg)";
+					col[i].style.height = "";
+				}
+				document.querySelector("#now90").style.transform = "rotate(0deg)";
+			}
 		}
 		
 		const dob = document.querySelector('input#dob');
