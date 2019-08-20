@@ -202,6 +202,7 @@
 			
 			var now = Date.now();
 			var weeks = (now - dob) / 60 / 60 / 24 / 7 / 1000;
+			weeks = Math.floor(weeks);
 			
 			var highlighted_diff = Math.floor(Math.abs(highlighted_count - weeks));
 			if (highlighted_count > weeks) {
@@ -209,7 +210,7 @@
 				var highlighted_last_item = document.querySelectorAll(".highlighted").item(highlighted_count-1);
 				for ( var i = 0; i < highlighted_diff; i++ ) {
 					// highlighted_count - highlighted_diff
-					var week = document.querySelector(".week" + (highlighted_count - i));
+					var week = document.querySelector(".week" + (highlighted_count - 1 - i));
 					week.classList.remove("highlighted");
 					week.innerHTML = "";
 				}
