@@ -83,9 +83,9 @@
 
 <div id="dob">
 	<h2 style="margin:0;">DOB:</h2>
-	<label for="day">Day:&nbsp;</label><input class="dobinput" placeholder="31" id="dob_day" type="number" step="1" min="1" max="31"/>
-	<label for="month">Month:&nbsp;</label><input class="dobinput" placeholder="12" id="dob_month" type="number" step="1" min="1" max="12"/>
-	<label for="year">Year:&nbsp;</label><input class="dobinput" placeholder="2019" id="dob_year" type="number" step="1" min="1929" max="2019"/>
+	<input type="date" id="dob" name="dob"
+		value="2018-07-22"
+		min="1900-01-01" max="2100-12-31">
 </div>
 <div style="position:relative">
 	<p style="position:absolute; bottom:0; text-align:left; margin:0 0 0 7em;">WEEK OF THE YEAR ---></p>
@@ -138,12 +138,8 @@
 			_div_calendar.appendChild(_div_week);
 		}
 		
-		const dob_day = document.querySelector('#dob_day');
-		const dob_month = document.querySelector('#dob_month');
-		const dob_year = document.querySelector('#dob_year');
-		dob_day.addEventListener('input', refresh_calendar);
-		dob_month.addEventListener('input', refresh_calendar);
-		dob_year.addEventListener('input', refresh_calendar);
+		const dob = document.querySelector('input#dob');
+		dob.addEventListener('input', refresh_calendar);
 		
 		
 		
@@ -153,13 +149,8 @@
 			var highlighted_count = document.querySelectorAll(".highlighted").length;
 			
 			
-			var day = document.querySelector("#dob_day").value != "" ? document.querySelector("#dob_day").value : 30;
-			var month = document.querySelector("#dob_month").value != "" ? document.querySelector("#dob_month").value : 12;
-			var year = document.querySelector("#dob_year").value != "" ? document.querySelector("#dob_year").value : 2019;
+			var dob = document.querySelector("input#dob").value;
 			
-			var dob = year + "-" + month + "-" + day;
-			// dob = dob.replace(/(?<=-)(\d{1}$)/, "0$&")
-			// dob = dob.replace(/(?<=-)(\d{1})/, "0$&")
 			dob = Date.parse(dob);
 			
 			var now = Date.now();
