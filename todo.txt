@@ -1,0 +1,17 @@
+
+
+TODO:
+In landscape regenrate entirely
+Separate html,css,js
+There are 16 weeks missing as we don't account for 52 weeks not filling a year.
+	365.25 - 364 = 1.25
+	1.25 * 90 = 112
+	112 / 7 = 16
+	Accounting for these depends upon the current year. 
+	If (current_year - dob_year % 4 == 0) add a box. 
+	If (current_year - dob_year % 7 == 0) add a box.
+	% 28 == 0 gets two boxes
+Remove downscale of calendar in landscape mode. Firefox doesn't handle well. Find some better way of viewing on 16:9 screens. zoom out?
+make month version
+dynamically generate svg
+publish to github

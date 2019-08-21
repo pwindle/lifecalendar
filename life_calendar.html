@@ -75,6 +75,9 @@
 			background-color: #ccc;
 		}
 		
+		#orientation label:hover {
+			cursor:pointer;
+		}
 		.landscape { 
 			transform-origin: top right;
 			transform: rotate(-90deg) translateY(-50%) scale(.5);
@@ -94,7 +97,7 @@
 		max="2100-12-31">
 </div>
 <div id="orientation">
-	<label>Landscape Mode</label><input type="checkbox" id="landscape" name="landscape" value="checked"/>
+	<label for="landscape">Landscape Mode</label><input type="checkbox" id="landscape" name="landscape" value="checked"/>
 </div>
 <div id="orient">
 	<div style="position:relative">
@@ -226,6 +229,7 @@
 				}
 			}
 		}
+		
 		
 	</script>
 
