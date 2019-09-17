@@ -1,7 +1,10 @@
 
 
 TODO:
+Make month version, make day version https://waitbutwhy.com/2015/12/the-tail-end.html https://28oa9i1t08037ue3m1l0i861-wpengine.netdna-ssl.com/wp-content/uploads/2015/12/A-90-Year-Life-in-Days.pdf
+Dynamically generate svg
 In landscape regenrate entirely
+Default to landscape
 Separate html,css,js
 There are 16 weeks missing as we don't account for 52 weeks not filling a year.
 	365.25 - 364 = 1.25
@@ -12,6 +15,4 @@ There are 16 weeks missing as we don't account for 52 weeks not filling a year.
 	If (current_year - dob_year % 7 == 0) add a box.
 	% 28 == 0 gets two boxes
 Remove downscale of calendar in landscape mode. Firefox doesn't handle well. Find some better way of viewing on 16:9 screens. zoom out?
-make month version
-dynamically generate svg
 publish to github
