@@ -12,13 +12,16 @@
 
 <div>
 	<h2 style="margin:0;">DOB:</h2>
-	<input type="date" id="dob" name="dob"
-		value="2018-07-22"
-		min="1900-01-01"
-		max="2100-12-31">
+	<input type="date" id="dob" name="dob" value="2018-07-22" min="1900-01-01" max="2100-12-31">
 </div>
 <div id="orientation">
-	<label for="landscape">Landscape Mode</label><input type="checkbox" id="landscape" name="landscape" value="checked"/>
+	<!--label for="landscape"><input type="checkbox" id="landscape" name="landscape" value="checked"/>&nbsp;Landscape Mode</label-->
+	<div class="govuk-checkboxes__item">
+		<input class="govuk-checkboxes__input" id="landscape" name="landscape" type="checkbox" value="checked">
+		<label class="govuk-label govuk-checkboxes__label" for="landscape">
+			Landscape Mode
+		</label>
+	</div>
 </div>
 <div id="orient">
 	<div style="position:relative">
