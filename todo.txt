@@ -15,4 +15,4 @@ There are 16 weeks missing as we don't account for 52 weeks not filling a year.
 	If (current_year - dob_year % 7 == 0) add a box.
 	% 28 == 0 gets two boxes
 Remove downscale of calendar in landscape mode. Firefox doesn't handle well. Find some better way of viewing on 16:9 screens. zoom out?
-publish to github
+make demo
